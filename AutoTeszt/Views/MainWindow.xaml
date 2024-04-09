@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:AutoTeszt.Views"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         x:Class="AutoTeszt.MainWindow" mc:Ignorable="d"
-        Title="MainWindow" Height="820" Width="1400" WindowStartupLocation="CenterScreen">
+        Title="{Binding Title}" Height="820" Width="1400" WindowStartupLocation="CenterScreen">
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="37*"/>

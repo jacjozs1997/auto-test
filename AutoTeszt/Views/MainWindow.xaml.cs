@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using AutoTeszt.Models.Blocks.Managers;
-using AutoTeszt.Models.Console.Services;
 using AutoTeszt.ViewModel;
 using AutoTeszt.Views;
 using HandyControl.Controls;
@@ -19,7 +19,7 @@ namespace AutoTeszt
             var userName = System.Security.Principal.WindowsIdentity.GetCurrent();
             var myCurrentLang = InputLanguageManager.Current.CurrentInputLanguage;
             InitializeComponent();
-            DataContext = new MainWindowViewModel(ConsoleService.Instance);
+            DataContext = new MainWindowViewModel();
             foreach (var block in BlockManager.Blocks)
             {
                 var newBlock = new Block()
@@ -29,6 +29,7 @@ namespace AutoTeszt
                 newBlock.Loaded += AddBlockActions;
                 FlexPanel.Children.Add(newBlock);
             }
+            //Process.Start("CMD.exe", @"DISM /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:d:\sources\sxs");
         }
 
         private void AddBlockActions(object sender, EventArgs e)
@@ -39,11 +40,6 @@ namespace AutoTeszt
             {
                 view.ActionContainer.Children.Add(action.UIElement);
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Growl.InfoGlobal("hhgjfghhg");
         }
     }
 }

@@ -3,18 +3,61 @@ using AutoTeszt.Models.Console.Services;
 using HandyControl.Tools.Command;
 using System;
 using System.Linq;
+using System.Management;
 using System.Windows.Input;
 
 namespace AutoTeszt.ViewModel
 {
     class MainWindowViewModel
     {
-        readonly ConsoleService m_consoleService;
-
-        public MainWindowViewModel(ConsoleService consoleService)
+        public string Title
         {
-            m_consoleService = consoleService;
+            get
+            {
+                string sn = null;
+                string pn = null;
+                string sku = null;
+                string manufacturer = null;
+                string model = null;
+                string bios = null;
 
+                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(new SelectQuery(@"SELECT Product, SerialNumber, SKU FROM Win32_BaseBoard")))
+                {
+                    foreach (ManagementObject process in searcher.Get())
+                    {
+                        Console.WriteLine("/*********Operating System Information ***************/");
+                        sn = process["SerialNumber"] as string;
+                        pn = process["Product"] as string;
+                        sku = process["SKU"] as string;
+                    }
+                }
+                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(new SelectQuery(@"Select * from Win32_ComputerSystem")))
+                {
+                    foreach (ManagementObject process in searcher.Get())
+                    {
+                        process.Get();
+                        manufacturer = process["Manufacturer"] as string;
+                        model = process["Model"] as string;
+                    }
+                }
+                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(new SelectQuery(@"SELECT * FROM Win32_BIOS")))
+                {
+                    foreach (ManagementObject process in searcher.Get())
+                    {
+                        if (((string[])process["BIOSVersion"]).Length > 1)
+                            Console.WriteLine("BIOS VERSION: " + ((string[])process["BIOSVersion"])[0] + " - " + ((string[])process["BIOSVersion"])[1]);
+                        else
+                            Console.WriteLine("BIOS VERSION: " + ((string[])process["BIOSVersion"])[0]);
+
+                        bios = ((string[])process["BIOSVersion"]).Length > 1 ? ((string[])process["BIOSVersion"])[0] + " - " + ((string[])process["BIOSVersion"])[1] : ((string[])process["BIOSVersion"])[0];
+                    }
+                }
+                return $"Előteszt by DagadtNeo - Serial: {sn} - PN: {pn} - {(sku != null ? ("SKU: " + sku) : "")} - Manufact: {manufacturer} - Model: {model} - Bios Ver: {bios}";
+            }
+        }
+
+        public MainWindowViewModel()
+        {
             ExecuteCommand = new RelayCommand<string>(Execute);
         }
 
@@ -27,38 +70,21 @@ namespace AutoTeszt.ViewModel
         private void Execute(string executionId)
         {
             var parts = executionId.Split(' ');
-            var command = parts[0];
-            CommandService.Instance.GetCommand(command)?.Execute(null);
-            switch (command)
+            var commandS = parts[0];
+            var command = CommandService.Instance.GetCommand(commandS);
+            if (command != null)
             {
-                case "echo":
-                    m_consoleService.WriteLine(parts.Skip(1).Aggregate((s1, s2) => s1 + " " + s2));
-                    break;
-
-                case "time":
-                    m_consoleService.WriteLine(DateTime.Now.ToLongTimeString());
-                    break;
-
-                case "date":
-                    m_consoleService.WriteLine(DateTime.Now.ToLongDateString());
-                    break;
-
-                case "cls":
-                case "clear":
-                    m_consoleService.Clear();
-                    break;
-
-                case "help":
-                    m_consoleService.WriteLine("Supported commands:");
-                    m_consoleService.WriteLine("\techo [text] - display text on next line");
-                    m_consoleService.WriteLine("\ttime        - display current time");
-                    m_consoleService.WriteLine("\tdate        - display current date");
-                    m_consoleService.WriteLine("\tclear       - clear command line");
-                    break;
-
-                default:
-                    m_consoleService.WriteLine("Try typing 'help' into the console and pressing enter.");
-                    break;
+                string props = null;
+                if (parts.Length > 1)
+                    props = parts.Skip(1).Aggregate((s1, s2) => $"{s1} {s2}");
+                if (command.CanExecute(props))
+                {
+                    command.Execute(props);
+                }
+            } 
+            else
+            {
+                ConsoleService.Instance.WriteLine($"Try typing 'help' into the console and pressing enter.");
             }
         }
     }
