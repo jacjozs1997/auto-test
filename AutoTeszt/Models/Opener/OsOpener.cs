@@ -76,8 +76,9 @@ namespace AutoTeszt.Models.Opener
                     Process.Start("cmd.exe", "net user hp /DELETE");
                 }
             } while (loop);
-            Process.Start("regedit.exe", "/s DisablePrivacyExperience.reg");//Setting oobe registry
+            Process.Start("regedit.exe", "/s DisablePrivacyExperience.reg").WaitForExit();//Setting oobe registry
             AddStartup();
+            Process.Start("shutdown.exe", "-r -t 0");//Restart
         }
     }
 }
