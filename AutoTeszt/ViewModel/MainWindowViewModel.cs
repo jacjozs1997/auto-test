@@ -1,5 +1,5 @@
 ﻿using AutoTeszt.Models.Commands.Services;
-using AutoTeszt.Models.Console.Services;
+using AutoTeszt.Models.Terminal.Services;
 using HandyControl.Tools.Command;
 using System;
 using System.Linq;
@@ -84,7 +84,7 @@ namespace AutoTeszt.ViewModel
             } 
             else
             {
-                ConsoleService.Instance.WriteLine($"Try typing 'help' into the console and pressing enter.");
+                TerminalService.Instance.WriteLine($"Try typing 'help' into the console and pressing enter.");
             }
         }
     }

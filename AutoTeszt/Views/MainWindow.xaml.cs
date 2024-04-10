@@ -6,6 +6,7 @@ using AutoTeszt.Models.Blocks.Managers;
 using AutoTeszt.ViewModel;
 using AutoTeszt.Views;
 using HandyControl.Controls;
+using Microsoft.Win32;
 
 namespace AutoTeszt
 {

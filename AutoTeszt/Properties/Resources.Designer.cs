@@ -59,5 +59,18 @@ namespace AutoTeszt.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows Registry Editor Version 5.00 
+        /// 
+        ///[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\OOBE] 
+        ///&quot;DisablePrivacyExperience&quot;=dword:00000001 
+        ///.
+        /// </summary>
+        internal static string DisablePrivacyExperience {
+            get {
+                return ResourceManager.GetString("DisablePrivacyExperience", resourceCulture);
+            }
+        }
     }
 }

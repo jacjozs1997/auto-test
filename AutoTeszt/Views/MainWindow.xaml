@@ -77,7 +77,7 @@
                 <hc:FlexPanel x:Name="FlexPanel" AlignItems="Center" FlexWrap="Wrap" JustifyContent="Center"/>
             </ScrollViewer>
         </hc:TransitioningContentControl>
-        <views:ConsoleControl x:Name="DefaultAutoTestConsole" Grid.Column="2" ExecuteCommand="{Binding ExecuteCommand}" 
+        <views:TerminalControl x:Name="DefaultAutoTestTerminal" Grid.Column="2" ExecuteCommand="{Binding ExecuteCommand}" 
                              WelcomeMessage="AutoTeszt 1.0.0 - Dagadt Neo" FontWeight="Bold" />
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right">
             <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Top" Margin="0,10,10,10"/>
