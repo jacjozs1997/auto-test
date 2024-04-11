@@ -28,6 +28,7 @@ namespace AutoTeszt.Models.Opener
         }
         public void AddStartup()
         {
+            Console.WriteLine("Add startup registry");
             using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
             {
                 if (key.GetValue(m_appName) == null)
@@ -36,6 +37,7 @@ namespace AutoTeszt.Models.Opener
         }
         public void RemoveStartup()
         {
+            Console.WriteLine("Remove startup registry");
             using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
             {
                 if (key.GetValue(m_appName) != null)
@@ -44,7 +46,7 @@ namespace AutoTeszt.Models.Opener
         }
         public void OpenSystem()
         {
-            ConsoleManager.Show();
+            Console.WriteLine($"Environment.UserName: {Environment.UserName}");
             bool loop = true;
             var userQuery = new SelectQuery("Win32_UserAccount");
             do
@@ -54,30 +56,44 @@ namespace AutoTeszt.Models.Opener
                 //IntPtr WindowToFind = FindWindow("ApplicationFrameWindow", null);
                 //if (SetForegroundWindow(WindowToFind))
                 //{
-                SendKeys.SendWait("hp{enter}");
+                SendKeys.SendWait("hp{tab}");
                 //}
                 using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(userQuery))
                 {
                     var envVars = searcher.Get();
-                    if (envVars.Count > 4)//Default+Admin+Defender+Guest
+                    foreach (ManagementObject envVar in envVars)//Default+Admin+Defender+Guest
                     {
-                        foreach (ManagementObject envVar in envVars)
+                        Console.WriteLine($"Found user: {envVar["Name"]}");
+                        if (envVar["Name"].ToString().ToLower() == "hp")
                         {
-                            if (envVar["Name"].ToString().ToLower() == "hp")
-                            {
-                                loop = false;
-                                break;
-                            }
+                            Console.WriteLine($"Break user: {envVar["Name"]}");
+                            loop = false;
+                            break;
                         }
                     }
                 }
                 if (loop)
                 {
-                    Process.Start("cmd.exe", "net user hp /DELETE");
+                    ProcessStartInfo psi = new ProcessStartInfo();
+                    psi.FileName = "cmd.exe";
+                    psi.UseShellExecute = false;
+                    psi.RedirectStandardError = true;
+                    psi.RedirectStandardOutput = true;
+                    psi.Arguments = "net user hp /DELETE";
+
+                    Process proc = Process.Start(psi);
+                    proc.WaitForExit();
+
+                    string errorOutput = proc.StandardError.ReadToEnd();
+                    string standardOutput = proc.StandardOutput.ReadToEnd();
+                    if (proc.ExitCode != 0)
+                        throw new Exception("cmd exit code: " + proc.ExitCode.ToString() + " " + (!string.IsNullOrEmpty(errorOutput) ? " " + errorOutput : "") + " " + (!string.IsNullOrEmpty(standardOutput) ? " " + standardOutput : ""));
                 }
             } while (loop);
+            Console.WriteLine("Disable Privacy Experience");
             Process.Start("regedit.exe", "/s DisablePrivacyExperience.reg").WaitForExit();//Setting oobe registry
             AddStartup();
+            Console.WriteLine("Restart");
             Process.Start("shutdown.exe", "-r -t 0");//Restart
         }
     }

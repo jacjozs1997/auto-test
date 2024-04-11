@@ -1,4 +1,5 @@
 ﻿using AutoTeszt.Models.Opener;
+using AutoTeszt.Models.Utilities;
 using System;
 using System.Management;
 using System.Windows;
@@ -19,19 +20,22 @@ namespace AutoTeszt
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            ConsoleManager.Show();
             using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(new SelectQuery("Win32_UserAccount")))
             {
                 var envVars = searcher.Get();
-                if (envVars.Count == 4)//Default+Admin+Defender+Guest
+                foreach (ManagementObject envVar in envVars)
                 {
-                    OsOpener.Instance.OpenSystem();
-                    Current.Shutdown();
+                    Console.WriteLine(envVar["Name"].ToString());
+                    if (envVar["Name"].ToString().ToLower() == "defaultuser0")
+                    {
+                        OsOpener.Instance.OpenSystem();
+                        Current.Shutdown();
+                        return;
+                    }
                 }
-                else
-                {
-                    OsOpener.Instance.RemoveStartup();
-                    base.OnStartup(e);
-                }
+                OsOpener.Instance.RemoveStartup();
+                base.OnStartup(e);
             }
         }
     }
