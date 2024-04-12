@@ -56,7 +56,7 @@ namespace AutoTeszt.Models.Opener
                 //IntPtr WindowToFind = FindWindow("ApplicationFrameWindow", null);
                 //if (SetForegroundWindow(WindowToFind))
                 //{
-                SendKeys.SendWait("hp{tab}");
+                SendKeys.SendWait("hp{enter}");
                 //}
                 using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(userQuery))
                 {

@@ -21,22 +21,14 @@ namespace AutoTeszt
         protected override void OnStartup(StartupEventArgs e)
         {
             ConsoleManager.Show();
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(new SelectQuery("Win32_UserAccount")))
+            if (Environment.UserName.ToLower() == "defaultuser0")
             {
-                var envVars = searcher.Get();
-                foreach (ManagementObject envVar in envVars)
-                {
-                    Console.WriteLine(envVar["Name"].ToString());
-                    if (envVar["Name"].ToString().ToLower() == "defaultuser0")
-                    {
-                        OsOpener.Instance.OpenSystem();
-                        Current.Shutdown();
-                        return;
-                    }
-                }
-                OsOpener.Instance.RemoveStartup();
-                base.OnStartup(e);
+                OsOpener.Instance.OpenSystem();
+                Current.Shutdown();
+                return;
             }
+            OsOpener.Instance.RemoveStartup();
+            base.OnStartup(e);
         }
     }
 }
