@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Management;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -46,18 +47,19 @@ namespace AutoTeszt.Models.Opener
         }
         public void OpenSystem()
         {
-            Console.WriteLine($"Environment.UserName: {Environment.UserName}");
             bool loop = true;
             var userQuery = new SelectQuery("Win32_UserAccount");
             do
             {
+                Console.WriteLine($"Open microsoft account window");
                 Process.Start("ms-cxh://SETADDNEWUSER");//Open login dialog
                 Thread.Sleep(900);
-                //IntPtr WindowToFind = FindWindow("ApplicationFrameWindow", null);
+                //IntPtr WindowToFind = FindWindow(null, GetMicrosoftTitle());
                 //if (SetForegroundWindow(WindowToFind))
                 //{
                 SendKeys.SendWait("hp{enter}");
                 //}
+
                 using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(userQuery))
                 {
                     var envVars = searcher.Get();
@@ -93,8 +95,24 @@ namespace AutoTeszt.Models.Opener
             Console.WriteLine("Disable Privacy Experience");
             Process.Start("regedit.exe", "/s DisablePrivacyExperience.reg").WaitForExit();//Setting oobe registry
             AddStartup();
-            Console.WriteLine("Restart");
+            Console.WriteLine("Restarting");
+            Console.ReadLine();
             Process.Start("shutdown.exe", "-r -t 0");//Restart
+        }
+        string GetMicrosoftTitle()
+        {
+            string title = "";
+            CultureInfo ci = CultureInfo.InstalledUICulture;
+            switch (ci.TwoLetterISOLanguageName.ToLower())
+            {
+                case "hu":
+                    title = "Microsoft-fiók";
+                    break;              
+                case "en":
+                    title = "Microsoft-account";
+                    break;
+            }
+            return title;
         }
     }
 }

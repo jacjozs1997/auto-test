@@ -64,22 +64,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Commands\Models\AdminOnCommand.cs" />
     <Compile Include="Models\Commands\Models\ClearConsoleCommand.cs" />
     <Compile Include="Models\Commands\Models\HelpCommand.cs" />
     <Compile Include="Models\Commands\Models\ATestCommand.cs" />
     <Compile Include="Models\Commands\Services\CommandService.cs" />
-    <Compile Include="Models\Terminal\ExecuteEventArgs.cs" />
-    <Compile Include="Models\Terminal\Helpers\TerminalHelpers.cs" />
-    <Compile Include="Models\Terminal\Internal\TerminalRegister.cs" />
-    <Compile Include="Models\Terminal\Services\TerminalService.cs" />
     <Compile Include="Models\Opener\OsOpener.cs" />
     <Compile Include="Models\Utilities\ConsoleManager.cs" />
     <Compile Include="Models\Utilities\Singleton.cs" />
     <Page Include="Views\Block.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TerminalControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -100,9 +93,6 @@
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="Views\Block.xaml.cs">
       <DependentUpon>Block.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TerminalControl.xaml.cs">
-      <DependentUpon>TerminalControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -10,6 +10,7 @@ namespace AutoTeszt.Models.Utilities
     public static class ConsoleManager
     {
         private const string Kernel32_DllName = "kernel32.dll";
+        private const short STD_OUTPUT_HANDLE = -11;
 
         [DllImport(Kernel32_DllName)]
         private static extern bool AllocConsole();
@@ -22,6 +23,12 @@ namespace AutoTeszt.Models.Utilities
 
         [DllImport(Kernel32_DllName)]
         private static extern int GetConsoleOutputCP();
+
+
+        [DllImport(Kernel32_DllName, SetLastError = true)]
+        static extern bool SetConsoleTextAttribute(IntPtr hConsoleOutput, short wAttribute); 
+        [DllImport(Kernel32_DllName, SetLastError = true)]
+        static extern IntPtr GetStdHandle(int nStdHandle);
 
         public static bool HasConsole
         {
@@ -38,6 +45,7 @@ namespace AutoTeszt.Models.Utilities
             {
                 AllocConsole();
                 InvalidateOutAndError();
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (short)10);
             }
             //#endif
         }
@@ -70,9 +78,12 @@ namespace AutoTeszt.Models.Utilities
 
         static void InvalidateOutAndError()
         {
-            Type type = typeof(System.Console);
+            Type type = typeof(Console);
 
             System.Reflection.FieldInfo _out = type.GetField("_out",
+                System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
+            
+            System.Reflection.FieldInfo _in = type.GetField("_in",
                 System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
 
             System.Reflection.FieldInfo _error = type.GetField("_error",
@@ -82,10 +93,12 @@ namespace AutoTeszt.Models.Utilities
                 System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
 
             Debug.Assert(_out != null);
+            Debug.Assert(_in != null);
             Debug.Assert(_error != null);
 
             Debug.Assert(_InitializeStdOutError != null);
 
+            _in.SetValue(null, null);
             _out.SetValue(null, null);
             _error.SetValue(null, null);
 
@@ -94,6 +107,7 @@ namespace AutoTeszt.Models.Utilities
 
         static void SetOutAndErrorNull()
         {
+            Console.SetIn(TextReader.Null);
             Console.SetOut(TextWriter.Null);
             Console.SetError(TextWriter.Null);
         }

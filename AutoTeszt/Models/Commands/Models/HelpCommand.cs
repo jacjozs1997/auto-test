@@ -1,5 +1,5 @@
 ﻿using AutoTeszt.Models.Commands.Services;
-using AutoTeszt.Models.Terminal.Services;
+using System;
 
 namespace AutoTeszt.Models.Commands.Models
 {
@@ -11,13 +11,13 @@ namespace AutoTeszt.Models.Commands.Models
         }
         public override void Execute(string prop)
         {
-            TerminalService.Instance.WriteLine("Supported commands:");
+            Console.WriteLine("Supported commands:");
             var commands = CommandService.Instance.GetCommands();
             foreach (var command in commands)
             {
                 if (command.ExecutionId != ExecutionId)
                 {
-                    TerminalService.Instance.WriteLine($"\t{command.ExecutionId}\t- {command.Help}");
+                    Console.WriteLine($"\t{command.ExecutionId}\t- {command.Help}");
                 }
             }
         }

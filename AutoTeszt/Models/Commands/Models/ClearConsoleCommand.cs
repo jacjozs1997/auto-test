@@ -1,4 +1,4 @@
-﻿using AutoTeszt.Models.Terminal.Services;
+﻿using System;
 
 namespace AutoTeszt.Models.Commands.Models
 {
@@ -10,7 +10,7 @@ namespace AutoTeszt.Models.Commands.Models
         }
         public override void Execute(string prop)
         {
-            TerminalService.Instance.Clear();
+            Console.Clear();
         }
     }
 }

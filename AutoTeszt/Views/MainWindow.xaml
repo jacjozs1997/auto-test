@@ -5,15 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:AutoTeszt"
-        xmlns:views="clr-namespace:AutoTeszt.Views"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         x:Class="AutoTeszt.MainWindow" mc:Ignorable="d"
         Title="{Binding Title}" Height="820" Width="1400" WindowStartupLocation="CenterScreen">
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="37*"/>
-            <ColumnDefinition Width="149*"/>
-            <ColumnDefinition Width="54*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="150*"/>
         </Grid.ColumnDefinitions>
         <hc:SideMenu BorderThickness="1" UseLayoutRounding="True" HorizontalContentAlignment="Stretch">
             <hc:Interaction.Triggers>
@@ -77,8 +75,6 @@
                 <hc:FlexPanel x:Name="FlexPanel" AlignItems="Center" FlexWrap="Wrap" JustifyContent="Center"/>
             </ScrollViewer>
         </hc:TransitioningContentControl>
-        <views:TerminalControl x:Name="DefaultAutoTestTerminal" Grid.Column="2" ExecuteCommand="{Binding ExecuteCommand}" 
-                             WelcomeMessage="AutoTeszt 1.0.0 - Dagadt Neo" FontWeight="Bold" />
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right">
             <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Top" Margin="0,10,10,10"/>
         </ScrollViewer>
