@@ -14,59 +14,40 @@
             <ColumnDefinition Width="150*"/>
         </Grid.ColumnDefinitions>
         <hc:SideMenu BorderThickness="1" UseLayoutRounding="True" HorizontalContentAlignment="Stretch">
-            <hc:Interaction.Triggers>
-                <hc:EventTrigger EventName="SelectionChanged">
-                    <hc:EventToCommand PassEventArgsToCommand="True" />
-                </hc:EventTrigger>
-            </hc:Interaction.Triggers>
-            <hc:SideMenuItem Header="Overview">
-                <!--<hc:SideMenuItem.Icon>
-                            <Image Source="" Width="24" Height="24"/>
-                        </hc:SideMenuItem.Icon>-->
-                <hc:SideMenuItem Header="Summary">
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xf2cb;"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-                <hc:SideMenuItem Header="Dashboards">
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xf246;"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-                <hc:SideMenuItem Header="Wiki" >
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xe82d;"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
+            <hc:SideMenuItem Header="Vezérlőpult" Command="{Binding SelectCmd}" CommandParameter="control">
+                <hc:SideMenuItem.Icon>
+                    <Image Source="/Resources/icons8-control-panel-48.png" Width="24" Height="24"/>
+                </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
-            <hc:SideMenuItem Header="Boards">
-                <!--<hc:SideMenuItem.Icon>
-                            <Image Source="/HandyControlDemo;component/Resources/Img/DevOps/DevOps-Boards.png" Width="24" Height="24"/>
-                        </hc:SideMenuItem.Icon>-->
-                <hc:SideMenuItem Header="Work Items">
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xf314;"/>
-                    </hc:SideMenuItem.Icon>
+            <hc:SideMenuItem Header="Eszközkezelő"  Command="{Binding SelectCmd}" CommandParameter="device">
+                <hc:SideMenuItem.Icon>
+                    <Image Source="/Resources/icons8-device-manager-48.png" Width="24" Height="24"/>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
+            <hc:SideMenuItem Header="Rendszerinformáció"  Command="{Binding SelectCmd}" CommandParameter="sysinfo">
+                <hc:SideMenuItem.Icon>
+                    <Image Source="/Resources/icons8-system-information-48.png" Width="24" Height="24"/>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
+            <hc:SideMenuItem Header="Eseménynapló"  Command="{Binding SelectCmd}" CommandParameter="events">
+                <hc:SideMenuItem.Icon>
+                    <Image Source="/Resources/icons8-eventvwr-48.png" Width="24" Height="24"/>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
+            <hc:SideMenuItem Header="Feladatkezelő"  Command="{Binding SelectCmd}" CommandParameter="taskmgr">
+                <hc:SideMenuItem.Icon>
+                    <Image Source="/Resources/icons8-taskmgr-48.png" Width="24" Height="24"/>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
+            <hc:SideMenuItem Header="Hangok">
+                <hc:SideMenuItem.Icon>
+                    <Image Source="/Resources/icons8-sound-48.png" Width="24" Height="24"/>
+                </hc:SideMenuItem.Icon>
+                <hc:SideMenuItem Header="Lejátszás" Command="{Binding SelectCmd}" CommandParameter="sound,0">
+
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Header="Boards">
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xf444;"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-                <hc:SideMenuItem Header="Backlogs">
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xf6bf;"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-                <hc:SideMenuItem Header="Sprints">
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xf3b0;"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-                <hc:SideMenuItem Header="Queries">
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xf2b8;"/>
-                    </hc:SideMenuItem.Icon>
+                <hc:SideMenuItem Header="Felvétel" Command="{Binding SelectCmd}" CommandParameter="sound,1">
+
                 </hc:SideMenuItem>
             </hc:SideMenuItem>
         </hc:SideMenu>

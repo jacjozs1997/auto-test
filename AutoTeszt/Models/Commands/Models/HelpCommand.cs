@@ -9,7 +9,7 @@ namespace AutoTeszt.Models.Commands.Models
         {
             m_executionId = "help";
         }
-        public override void Execute(string prop)
+        public override void Execute(object prop)
         {
             Console.WriteLine("Supported commands:");
             var commands = CommandService.Instance.GetCommands();

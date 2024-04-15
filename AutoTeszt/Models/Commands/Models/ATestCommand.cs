@@ -6,24 +6,23 @@ namespace AutoTeszt.Models.Commands.Models
     {
         #region Variables
         protected string m_executionId;
-        protected RelayCommand<string> m_command;
+        protected RelayCommand<object> m_command;
         #endregion
         #region Properties
         public virtual string ExecutionId => m_executionId;
-        public virtual RelayCommand<string> Command => m_command;
+        public virtual RelayCommand<object> Command => m_command;
         public virtual string Help => null;
         #endregion
 
         public ATestCommand()
         {
-            m_executionId = "clear|cls";
-            m_command = new RelayCommand<string>((prop) => Execute(prop), (prop) => CanExecute(prop));
+            m_command = new RelayCommand<object>((prop) => Execute(prop), (prop) => CanExecute(prop));
         }
-        public virtual void Execute(string prop)
+        public virtual void Execute(object prop)
         {
 
         }
-        public virtual bool CanExecute(string prop)
+        public virtual bool CanExecute(object prop)
         {
             return true;
         }

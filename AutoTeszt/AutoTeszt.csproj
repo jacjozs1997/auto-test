@@ -66,8 +66,15 @@
     </ApplicationDefinition>
     <Compile Include="Models\Commands\Models\AdminOnCommand.cs" />
     <Compile Include="Models\Commands\Models\ClearConsoleCommand.cs" />
+    <Compile Include="Models\Commands\Models\EventsViwerCommand.cs" />
+    <Compile Include="Models\Commands\Models\ExitCommand.cs" />
     <Compile Include="Models\Commands\Models\HelpCommand.cs" />
     <Compile Include="Models\Commands\Models\ATestCommand.cs" />
+    <Compile Include="Models\Commands\Models\OpenControlPanel.cs" />
+    <Compile Include="Models\Commands\Models\OpenDevicesCommand.cs" />
+    <Compile Include="Models\Commands\Models\OpenSoundCommand.cs" />
+    <Compile Include="Models\Commands\Models\TaskmanagerCommand.cs" />
+    <Compile Include="Models\Commands\Models\SysinfoCommand.cs" />
     <Compile Include="Models\Commands\Services\CommandService.cs" />
     <Compile Include="Models\Opener\OsOpener.cs" />
     <Compile Include="Models\Utilities\ConsoleManager.cs" />
@@ -130,6 +137,33 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\icons8-control-panel-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\icons8-device-manager-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-system-information-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-taskmgr-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-eventvwr-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-sound-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

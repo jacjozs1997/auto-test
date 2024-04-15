@@ -1,9 +1,15 @@
-﻿using System.Management;
+﻿using AutoTeszt.Models.Commands.Services;
+using HandyControl.Tools.Command;
+using System.Linq;
+using System.Management;
 
 namespace AutoTeszt.ViewModel
 {
     public class MainWindowViewModel
     {
+        #region Variables
+        private RelayCommand<string> m_selectCmd;
+        #endregion
         public static string Title
         {
             get
@@ -43,10 +49,19 @@ namespace AutoTeszt.ViewModel
                 return $"Előteszt by DagadtNeo - Serial: {sn} - PN: {pn} {(sku != null ? (" - SKU: " + sku) : "")} - Manufact: {manufacturer} - Model: {model} - Bios Ver: {bios}";
             }
         }
-
+        public RelayCommand<string> SelectCmd => m_selectCmd;
+        private void Select(string command)
+        {
+            var args = command.Split(',');
+            var relayCommand = CommandService.Instance.GetCommand(args[0].ToLower());
+            if (relayCommand != null && relayCommand.CanExecute(args.Skip(1)))
+            {
+                relayCommand.Execute(args.Skip(1));
+            }
+        }
         public MainWindowViewModel()
         {
-            
+            m_selectCmd = new RelayCommand<string>(Select, x => true);
         }
     }
 }

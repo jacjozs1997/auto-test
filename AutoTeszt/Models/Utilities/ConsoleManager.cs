@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoTeszt.Models.Commands.Services;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -46,6 +47,7 @@ namespace AutoTeszt.Models.Utilities
                 AllocConsole();
                 InvalidateOutAndError();
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (short)10);
+                //CommandService.Instance.StartConsoleListner();
             }
             //#endif
         }
@@ -60,6 +62,7 @@ namespace AutoTeszt.Models.Utilities
             {
                 SetOutAndErrorNull();
                 FreeConsole();
+                CommandService.Instance.StopConsoleListner();
             }
             //#endif
         }

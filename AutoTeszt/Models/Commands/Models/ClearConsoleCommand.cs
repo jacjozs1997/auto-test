@@ -8,7 +8,7 @@ namespace AutoTeszt.Models.Commands.Models
         {
             m_executionId = "clear|cls";
         }
-        public override void Execute(string prop)
+        public override void Execute(object prop)
         {
             Console.Clear();
         }

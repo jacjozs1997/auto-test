@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace AutoTeszt.Models.Commands.Services
 {
@@ -13,6 +14,7 @@ namespace AutoTeszt.Models.Commands.Services
     {
         #region Variables
         private ConcurrentDictionary<string, ATestCommand> m_commands = new ConcurrentDictionary<string, ATestCommand>();
+        private Task m_consoleListenerTask;
         #endregion
         public CommandService()
         {
@@ -25,32 +27,47 @@ namespace AutoTeszt.Models.Commands.Services
             foreach (Type commandType in commands)
             {
                 command = Activator.CreateInstance(commandType) as ATestCommand;
-                m_commands.TryAdd(command.ExecutionId.ToLower(), command);
-            }
-        }
-        public RelayCommand<string> GetCommand(string executionId)
-        {
-            executionId = executionId.ToLower();
-            if (executionId.Contains('|'))
-            {
-                var ids = executionId.Trim().Split('|');
-                RelayCommand<string> command = null;
-                foreach (var id in ids)
+                if (command.ExecutionId.Contains('|'))
                 {
-                    command = GetSingeCommand(id);
-                    if (command != null)
+                    var ids = command.ExecutionId.Trim().Split('|');
+                    foreach (var id in ids)
                     {
-                        return command;
+                        m_commands.TryAdd(id, command);
                     }
                 }
-                return null;
-            } 
-            else
-            {
-                return GetSingeCommand(executionId);
+                else
+                {
+                    m_commands.TryAdd(command.ExecutionId.ToLower(), command);
+                }
             }
+
+            m_consoleListenerTask = new Task(() =>
+            {
+                string executionId = null;
+                do
+                {
+                    executionId = Console.ReadLine();
+                    var parts = executionId.Split(' ');
+                    var commandS = parts[0];
+                    var relayCommand = GetCommand(commandS);
+                    if (relayCommand != null)
+                    {
+                        string props = null;
+                        if (parts.Length > 1)
+                            props = parts.Skip(1).Aggregate((s1, s2) => $"{s1} {s2}");
+                        if (relayCommand.CanExecute(props))
+                        {
+                            relayCommand.Execute(props);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Try typing 'help' into the console and pressing enter.");
+                    }
+                } while (true);
+            });
         }
-        private RelayCommand<string> GetSingeCommand(string id)
+        public RelayCommand<object> GetCommand(string id)
         {
             if (m_commands.ContainsKey(id))
             {
@@ -61,6 +78,14 @@ namespace AutoTeszt.Models.Commands.Services
         public ICollection<ATestCommand> GetCommands()
         {
             return m_commands.Values;
+        }
+        public void StartConsoleListner()
+        {
+            m_consoleListenerTask?.Start();
+        }
+        public void StopConsoleListner()
+        {
+            m_consoleListenerTask?.Dispose();
         }
     }
 }
