@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoTeszt.Models.Commands.Models
 {
@@ -15,7 +12,14 @@ namespace AutoTeszt.Models.Commands.Models
         }
         public override void Execute(object prop)
         {
-            Process.Start("control", $"mmsys.cpl,,1");
+            if (prop is IEnumerable<string>)
+            {
+                Process.Start("control", $"mmsys.cpl,,{((IEnumerable<string>)prop).ElementAt(0)}");
+            }
+            else
+            {
+                Process.Start("control", $"mmsys.cpl,,0");
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace AutoTeszt.Models.Commands.Models
 {
@@ -10,6 +11,7 @@ namespace AutoTeszt.Models.Commands.Models
         }
         public override void Execute(object prop)
         {
+            Console.WriteLine("Start system information");
             Process.Start("msinfo32");
         }
     }

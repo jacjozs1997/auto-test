@@ -47,7 +47,7 @@ namespace AutoTeszt.Models.Utilities
                 AllocConsole();
                 InvalidateOutAndError();
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (short)10);
-                //CommandService.Instance.StartConsoleListner();
+                CommandService.Instance.StartConsoleListner();
             }
             //#endif
         }

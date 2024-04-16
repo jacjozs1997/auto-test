@@ -13,7 +13,7 @@
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="150*"/>
         </Grid.ColumnDefinitions>
-        <hc:SideMenu BorderThickness="1" UseLayoutRounding="True" HorizontalContentAlignment="Stretch">
+        <hc:SideMenu BorderThickness="1" UseLayoutRounding="True" HorizontalContentAlignment="Stretch" AutoSelect="False">
             <hc:SideMenuItem Header="Vezérlőpult" Command="{Binding SelectCmd}" CommandParameter="control">
                 <hc:SideMenuItem.Icon>
                     <Image Source="/Resources/icons8-control-panel-48.png" Width="24" Height="24"/>
@@ -39,15 +39,29 @@
                     <Image Source="/Resources/icons8-taskmgr-48.png" Width="24" Height="24"/>
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
+            <hc:SideMenuItem Header="Megbízhatóságfigyelő"  Command="{Binding SelectCmd}" CommandParameter="perfmon">
+                <hc:SideMenuItem.Icon>
+                    <Image Source="/Resources/icons8-perform-48.png" Width="24" Height="24"/>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
+            <hc:SideMenuItem Header="Kamera"  Command="{Binding SelectCmd}" CommandParameter="camera">
+                <hc:SideMenuItem.Icon>
+                    <Image Source="/Resources/icons8-camera-48.png" Width="24" Height="24"/>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
             <hc:SideMenuItem Header="Hangok">
                 <hc:SideMenuItem.Icon>
                     <Image Source="/Resources/icons8-sound-48.png" Width="24" Height="24"/>
                 </hc:SideMenuItem.Icon>
                 <hc:SideMenuItem Header="Lejátszás" Command="{Binding SelectCmd}" CommandParameter="sound,0">
-
+                    <hc:SideMenuItem.Icon>
+                        <Image Source="/Resources/icons8-speaker-48.png" Width="24" Height="24"/>
+                    </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
                 <hc:SideMenuItem Header="Felvétel" Command="{Binding SelectCmd}" CommandParameter="sound,1">
-
+                    <hc:SideMenuItem.Icon>
+                        <Image Source="/Resources/icons8-microfon-48.png" Width="24" Height="24"/>
+                    </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
             </hc:SideMenuItem>
         </hc:SideMenu>

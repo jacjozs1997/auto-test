@@ -1,5 +1,6 @@
 ﻿using AutoTeszt.Models.Commands.Services;
 using HandyControl.Tools.Command;
+using System.Globalization;
 using System.Linq;
 using System.Management;
 
@@ -20,7 +21,7 @@ namespace AutoTeszt.ViewModel
                 string manufacturer = null;
                 string model = null;
                 string bios = null;
-
+                CultureInfo ci = CultureInfo.InstalledUICulture;
                 using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(new SelectQuery(@"SELECT Product, SerialNumber, SKU FROM Win32_BaseBoard")))
                 {
                     foreach (ManagementObject process in searcher.Get())
@@ -46,7 +47,7 @@ namespace AutoTeszt.ViewModel
                         bios = ((string[])process["BIOSVersion"]).Length > 1 ? ((string[])process["BIOSVersion"])[0] + " - " + ((string[])process["BIOSVersion"])[1] : ((string[])process["BIOSVersion"])[0];
                     }
                 }
-                return $"Előteszt by DagadtNeo - Serial: {sn} - PN: {pn} {(sku != null ? (" - SKU: " + sku) : "")} - Manufact: {manufacturer} - Model: {model} - Bios Ver: {bios}";
+                return $"Előteszt by DagadtNeo - Serial: {sn} - PN: {pn} {(sku != null ? (" - SKU: " + sku) : "")} - Manufact: {manufacturer} - Model: {model} - Bios Ver: {bios} - Language: {ci.TwoLetterISOLanguageName} - Keyboard layout id: {ci.KeyboardLayoutId}";
             }
         }
         public RelayCommand<string> SelectCmd => m_selectCmd;

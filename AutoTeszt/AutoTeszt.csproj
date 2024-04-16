@@ -42,6 +42,12 @@
     <Reference Include="HandyControl, Version=3.5.2.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
       <HintPath>..\packages\HandyControls.3.5.2\lib\net46\HandyControl.dll</HintPath>
     </Reference>
+    <Reference Include="JsonConfig, Version=1.0.5359.16918, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JsonConfig.1.0.0\lib\JsonConfig.dll</HintPath>
+    </Reference>
+    <Reference Include="JsonFx, Version=2.0.1209.2802, Culture=neutral, PublicKeyToken=315052dd637f8a52, processorArchitecture=MSIL">
+      <HintPath>..\packages\JsonFx.2.0.1209.2802\lib\net40\JsonFx.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
@@ -70,9 +76,11 @@
     <Compile Include="Models\Commands\Models\ExitCommand.cs" />
     <Compile Include="Models\Commands\Models\HelpCommand.cs" />
     <Compile Include="Models\Commands\Models\ATestCommand.cs" />
+    <Compile Include="Models\Commands\Models\OpenCameraCommand.cs" />
     <Compile Include="Models\Commands\Models\OpenControlPanel.cs" />
     <Compile Include="Models\Commands\Models\OpenDevicesCommand.cs" />
     <Compile Include="Models\Commands\Models\OpenSoundCommand.cs" />
+    <Compile Include="Models\Commands\Models\PerfmonCommand.cs" />
     <Compile Include="Models\Commands\Models\TaskmanagerCommand.cs" />
     <Compile Include="Models\Commands\Models\SysinfoCommand.cs" />
     <Compile Include="Models\Commands\Services\CommandService.cs" />
@@ -125,6 +133,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.manifest" />
+    <None Include="config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -162,6 +173,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons8-sound-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-microfon-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\icons8-speaker-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-perform-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-camera-48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
