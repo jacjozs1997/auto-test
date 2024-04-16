@@ -14,6 +14,7 @@ namespace AutoTeszt.Models.Blocks.Managers
         #region Variables
         private static ObservableCollection<Block> m_blocks = new ObservableCollection<Block>()
         {
+            new CptBlock(),
             new AdminBlock(),
             new Block("Block 2", new SolidColorBrush(Colors.OrangeRed), "Block Decription 2"),
             new Block("Block 3", new SolidColorBrush(Colors.Violet), "Block Decription 3"),
