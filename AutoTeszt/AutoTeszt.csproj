@@ -71,7 +71,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Actions\Models\CPT\CptStart.cs" />
+    <Compile Include="Models\Actions\Models\StressTest\Combi.cs" />
+    <Compile Include="Models\Actions\Models\StressTest\Cpuburner.cs" />
+    <Compile Include="Models\Actions\Models\StressTest\Furmark.cs" />
     <Compile Include="Models\Blocks\Models\CptBlock.cs" />
+    <Compile Include="Models\Blocks\Models\StressTestBlock.cs" />
     <Compile Include="Models\Commands\Models\AdminOnCommand.cs" />
     <Compile Include="Models\Commands\Models\ClearConsoleCommand.cs" />
     <Compile Include="Models\Commands\Models\CptStartCommand.cs" />
@@ -79,6 +83,8 @@
     <Compile Include="Models\Commands\Models\ExitCommand.cs" />
     <Compile Include="Models\Commands\Models\HelpCommand.cs" />
     <Compile Include="Models\Commands\Models\ATestCommand.cs" />
+    <Compile Include="Models\Commands\Models\MonitorBrightnessCommand.cs" />
+    <Compile Include="Models\Commands\Models\OpenAppwizCommand.cs" />
     <Compile Include="Models\Commands\Models\OpenCameraCommand.cs" />
     <Compile Include="Models\Commands\Models\OpenControlPanel.cs" />
     <Compile Include="Models\Commands\Models\OpenDevicesCommand.cs" />
@@ -89,6 +95,7 @@
     <Compile Include="Models\Commands\Services\CommandService.cs" />
     <Compile Include="Models\Opener\OsOpener.cs" />
     <Compile Include="Models\Utilities\ConsoleManager.cs" />
+    <Compile Include="Models\Utilities\DriveSettings.cs" />
     <Compile Include="Models\Utilities\Singleton.cs" />
     <Page Include="Views\Block.xaml">
       <SubType>Designer</SubType>
@@ -134,18 +141,49 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Misc\FurMark\g.dz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Misc\FurMark\gui.gxl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Misc\FurMark\libs\lua\gxl.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Misc\FurMark\libs\lua\imgui.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Misc\FurMark\libs\lua\imgui_implot.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Misc\FurMark\settings.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Misc\FurMark\start_benchmark.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Misc\FurMark\start_examples.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Misc\FurMark\start_fullscreen.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Misc\FurMark\start_vram_test.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Misc\FurMark\vram_test.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Resources\DisablePrivacyExperience.reg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +232,55 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons8-camera-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-appwiz-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Misc\FurMark\cpuburner\cpuburner.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Misc\FurMark\gpuz\gpuz.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Misc\FurMark\plugins\plugin_gxc_as_x64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Misc\FurMark\plugins\plugin_gxc_gpumon_x64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Misc\FurMark\plugins\plugin_gxc_vulkan2_x64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Misc\FurMark\conf.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Misc\FurMark\furmark.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Misc\FurMark\FurMark_GUI.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Misc\FurMark\gpumagick_sdk_x64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Misc\FurMark\gxc_x64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Misc\FurMark\gxl_x64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Misc\FurMark\help.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Misc\FurMark\init0.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Misc\FurMark\README.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

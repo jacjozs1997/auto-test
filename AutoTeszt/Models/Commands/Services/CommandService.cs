@@ -43,13 +43,13 @@ namespace AutoTeszt.Models.Commands.Services
 
             m_consoleListenerTask = new Task(() =>
             {
-                string executionId = null;
+                string commandS = null;
                 do
                 {
-                    executionId = Console.ReadLine();
-                    var parts = executionId.Split(' ');
-                    var commandS = parts[0];
-                    var relayCommand = GetCommand(commandS);
+                    commandS = Console.ReadLine();
+                    var parts = commandS.Split(' ');
+                    var executionId = parts[0];
+                    var relayCommand = GetCommand(executionId);
                     if (relayCommand != null)
                     {
                         string props = null;

@@ -29,7 +29,9 @@ namespace AutoTeszt.Models.Tests
                     this.m_uiElement = new Button()
                     {
                         Content = this.m_name,
-                        Width = 100,
+                        FontWeight = FontWeights.Bold,
+                        FontSize = 14,
+                        FontFamily = new System.Windows.Media.FontFamily("Arial Rounded MT Bold")
                     };
                     ((Button)m_uiElement).Command = CommandService.Instance.GetCommand(this.m_executionId);
                 }

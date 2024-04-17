@@ -12,7 +12,7 @@ namespace AutoTeszt.Models.Commands.Models
         public override void Execute(object prop)
         {
             Console.WriteLine("Start perfmon");
-            Process.Start("perfmon.exe /rel");
+            Process.Start("perfmon", "/rel");
         }
     }
 }

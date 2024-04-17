@@ -1,0 +1,39 @@
+(22:12:31:704)	FurMark 2.2.0.0 (build: Apr  2 2024@14:20:22)
+(22:12:31:704)	(c)2007-2024 Geeks3D
+(22:12:31:704)	homepage: https://www.geeks3d.com/furmark/
+(22:12:31:704)	discord server : https://geeks3d.com/discord/
+(22:12:31:704)	FurMark (GeeXLab engine) initialization...
+(22:12:31:705)	command line: furmark --demo furmark-vl --width 1920 --height 1080 --furmark-vram-test-gb 4 
+(22:12:31:705)	FurMark home directory: C:\Users\Hikaru\source\repos\AutoTeszt\AutoTeszt\Misc\FurMark\
+(22:12:31:707)	[stb] STB image loader. Supported formats: *.JPEG, *.PNG, *.TGA, *.BMP, *.PSD, *.GIF, *.HDR, *.PIC
+(22:12:31:707)	[tinyexr] EXR image loader.
+(22:12:31:708)	[lib3ds] Lib3ds loader (core plugin).
+(22:12:31:708)	[ObjLoaderV1] OBJ 3D loader (core plugin).
+(22:12:31:708)	[ObjLoaderV2] OBJ loader based on Tiny OBJ Loader (core plugin).
+(22:12:31:708)	[STL] STL (StereoLithography) 3D loader (core plugin).
+(22:12:31:709)	[glTF] glTF 3D loader (core plugin).
+(22:12:31:709)	[SQLite3] SQLite3 version 3.45.1
+(22:12:31:709)	GraphX Core 0.53.0.0 (codename: Euler) initialization ok.
+(22:12:31:710)	Windows version: Windows 11 build 22631
+(22:12:31:710)	HW platform type: PC
+(22:12:31:710)	SW platform type: Windows 64-bit
+(22:12:31:714)	[Vulkan2] Vulkan renderer plugin (Windows, Linux)
+(22:12:31:980)	[Vulkan2] instance version: 4198400 (Vulkan 1.1)
+(22:12:32:045)	[GpuMonitor] Operating system detected: Windows 11 build 22631
+(22:12:32:054)	[GpuMonitor] Num physical GPU(s): 1 
+(22:12:32:054)	[GpuMonitor] Num logical GPU(s): 1 
+(22:12:32:122)	[GpuMonitor] Num GPUs found: 2
+(22:12:32:122)	[GpuMonitor] GPU0 - NVIDIA GeForce GTX 1650 Ti
+(22:12:32:122)	[GpuMonitor] GPU0 - PCI codes: 0x10DE-0x1F95
+(22:12:32:122)	[GpuMonitor] GPU0 - BIOS: 90.17.48.00.10
+(22:12:32:122)	[GpuMonitor] GPU0 - core temperature: 43 degC
+(22:12:32:122)	[GpuMonitor] GPU1 - AMD Radeon(TM) Graphics
+(22:12:32:122)	[GpuMonitor] GPU1 - PCI codes: 0x1002-0x1636
+(22:12:32:122)	[GpuMonitor] GPU1 - BIOS: 017.010.000.014/113-RENOIR-025 (2020/01/21 19:02)
+(22:12:32:122)	[GpuMonitor] GPU1 - core temperature: 49 degC
+(22:12:32:122)	[GpuMonitor] GPU1 - driver: Adrenalin 20.10.22.03
+(22:12:32:123)	FurMark (GeeXLab engine) started ok.
+(22:12:32:123)	system DPI: 96
+(22:12:33:147)	FurMark (GeeXLab engine) is shutting down...
+(22:12:33:164)	GraphX Core stopped ok.
+(22:12:33:164)	FurMark (GeeXLab engine) shutdown ok.

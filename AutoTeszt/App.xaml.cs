@@ -36,6 +36,7 @@ namespace AutoTeszt
             {
                 ConsoleManager.Show();
                 Console.Title = MainWindowViewModel.Title;
+
                 if (Environment.UserName.ToLower() == "defaultuser0")
                 {
                     OsOpener.Instance.OpenSystem();

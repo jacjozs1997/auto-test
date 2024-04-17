@@ -13,7 +13,7 @@
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="150*"/>
         </Grid.ColumnDefinitions>
-        <hc:SideMenu BorderThickness="1" UseLayoutRounding="True" HorizontalContentAlignment="Stretch" AutoSelect="False">
+        <hc:SideMenu BorderThickness="1" UseLayoutRounding="True" HorizontalContentAlignment="Stretch"  AutoSelect="False" FontFamily="Arial Rounded MT Bold" FontWeight="Bold" ExpandMode="Freedom">
             <hc:SideMenuItem Header="Vezérlőpult" Command="{Binding SelectCmd}" CommandParameter="control">
                 <hc:SideMenuItem.Icon>
                     <Image Source="/Resources/icons8-control-panel-48.png" Width="24" Height="24"/>
@@ -42,6 +42,11 @@
             <hc:SideMenuItem Header="Megbízhatóságfigyelő"  Command="{Binding SelectCmd}" CommandParameter="perfmon">
                 <hc:SideMenuItem.Icon>
                     <Image Source="/Resources/icons8-perform-48.png" Width="24" Height="24"/>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
+            <hc:SideMenuItem Header="Programok és szolgáltatások"  Command="{Binding SelectCmd}" CommandParameter="appwiz">
+                <hc:SideMenuItem.Icon>
+                    <Image Source="/Resources/icons8-appwiz-48.png" Width="24" Height="24"/>
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
             <hc:SideMenuItem Header="Kamera"  Command="{Binding SelectCmd}" CommandParameter="camera">

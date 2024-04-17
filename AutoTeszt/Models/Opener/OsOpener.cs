@@ -58,10 +58,16 @@ namespace AutoTeszt.Models.Opener
             Console.WriteLine("Disable Privacy Experience");
             using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\OOBE", true))
             {
-                if (key.GetValue("DisablePrivacyExperience") == null)
-                    key.SetValue("DisablePrivacyExperience", 1);
+                RegistryKey registry = key;
+                if (registry == null)
+                    registry = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Policies\Microsoft\Windows\OOBE");
+
+                if (registry.GetValue("DisablePrivacyExperience") == null)
+                    registry.SetValue("DisablePrivacyExperience", 1);
                 else
                     Console.Error.Write("Faild disable privacy experience");
+
+                registry.Dispose();
             }
         }
         public void OpenSystem()
@@ -79,20 +85,7 @@ namespace AutoTeszt.Models.Opener
                         if (envVar["Name"].ToString().ToLower() == m_hpUserName)
                         {
                             Console.WriteLine($"Delete old {m_hpUserName} user");
-                            ProcessStartInfo psi = new ProcessStartInfo();
-                            psi.FileName = "cmd.exe";
-                            psi.UseShellExecute = false;
-                            psi.RedirectStandardError = true;
-                            psi.RedirectStandardOutput = true;
-                            psi.Arguments = $"net user {m_hpUserName} /DELETE";
-
-                            Process proc = Process.Start(psi);
-                            proc.WaitForExit();
-
-                            string errorOutput = proc.StandardError.ReadToEnd();
-                            string standardOutput = proc.StandardOutput.ReadToEnd();
-                            if (proc.ExitCode != 0)
-                                throw new Exception("cmd exit code: " + proc.ExitCode.ToString() + " " + (!string.IsNullOrEmpty(errorOutput) ? " " + errorOutput : "") + " " + (!string.IsNullOrEmpty(standardOutput) ? " " + standardOutput : ""));
+                            Process.Start("net", $"user {m_hpUserName} /DELETE").WaitForExit();
                             break;
                         }
                     }
@@ -117,7 +110,6 @@ namespace AutoTeszt.Models.Opener
                 }
             } while (loop);
             DisablePrivacyRegistry();
-            //Process.Start("regedit.exe", "/s DisablePrivacyExperience.reg").WaitForExit();//Setting oobe registry
             AddStartup();
             Console.WriteLine("Restarting");
             Console.ReadLine();
